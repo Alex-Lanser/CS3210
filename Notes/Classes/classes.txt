@@ -1,0 +1,6 @@
+Access Modifiers
+
+                    main() children friends itself
+private(default)      N        N       Y      Y
+protected             N        Y       Y      Y
+public                Y        Y       Y      Y
