@@ -1,3 +1,13 @@
+/*
+ * Lab01 - STL Files
+ * Allow the user to select an STL file to read and
+ * parse through the file, and outputting the number
+ * of facets and the minimum and maximum value of x, y, and z
+ * MSOE-CS3210
+ * Alex Lanser
+ * 03/09/2023
+*/
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
