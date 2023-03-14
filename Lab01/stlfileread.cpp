@@ -63,7 +63,6 @@ public:
                 iss >> x;
                 iss >> y;
                 iss >> z;
-                cout << x << endl;
                 // Change min and max values
                 if (x < minX)
                 {
