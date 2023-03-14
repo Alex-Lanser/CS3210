@@ -1,5 +1,5 @@
 CC = g++
-EXECUTABLE = making_ex1
+EXECUTABLE = main
 CFLAGS = -c -MMD
 LINKFLAG =
 SOURCES = main.cpp row.cpp
