@@ -37,4 +37,40 @@ void Database::print_first_data() const
     cout << data[0] << endl;
 }
 
+Database Database::operator=(const Database &rhs)
+{
+    if (this != &rhs)
+    {
+        cout << "operator=" << endl;
+        size = rhs.size;
+        delete[] data;
+        data = new int[size];
+        for (int i = 0; i < size; i++)
+        {
+            this->data[i] = rhs.data[i];
+        }
+    }
+    return *this;
+}
+
+int Database::operator[](int index) const
+{
+    if (index < 0 || index >= size)
+    {
+        throw out_of_range("Index must be >= 0 and < size");
+    }
+    cout << "operator[]" << endl;
+    return data[index];
+}
+
+int &Database::operator[](int index)
+{
+    if (index < 0 || index >= size)
+    {
+        throw out_of_range("Index must be >= 0 and < size");
+    }
+    cout << "non-const operator[]" << endl;
+    return data[index];
+}
+
 // To run with valgrind: just input valgrind ./main

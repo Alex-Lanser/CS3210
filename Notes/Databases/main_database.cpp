@@ -27,13 +27,19 @@ public:
 
 int main()
 {
-    myInt my1;
-    my1.i = 1;
-    myInt my2;
-    my2.i = 2;
-    myInt my3 = my1.operator+(my2);
-    cout << my3.i << endl;
-    
+    Database D1(3);
+    Database D2(2);
+    D1 = D2; // D1.operator=(D2);
+    D1.data[0] = 7;
+    cout << D1[0] << endl; // D1.operator[](0)
+
+    // myInt my1;
+    // my1.i = 1;
+    // myInt my2;
+    // my2.i = 2;
+    // myInt my3 = my1.operator+(my2);
+    // cout << my3.i << endl;
+
     // const double = 4;
     // const double *xp = &x;
     // const double &xr = x; // Not just double &xr = x;
