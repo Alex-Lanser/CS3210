@@ -17,7 +17,7 @@ Row::Row(int length)
 // copy constructor
 Row::Row(const Row &from)
 {
-	int length = from.length;
+	length = from.length;
 	row_data = new double[length];
 	for (int i = 0; i < length; i++)
 	{
@@ -34,25 +34,37 @@ Row::~Row()
 // access operator (const)
 double Row::operator[](int column) const
 {
-	// finish
-	double result;
-	return result;
+	if (column < 0 || column >= length)
+	{
+		throw out_of_range("Column must be >= 0 and < length");
+	}
+	return row_data[column];
 }
 
 // access operator (non-const)
 double &Row::operator[](int column)
 {
-	// finish
-	double result;
-	return result;
+	if (column < 0 || column >= length)
+	{
+		throw out_of_range("Column must be >= 0 and < length");
+	}
+	return row_data[column];
 }
 
 // assignment operator
 Row &Row::operator=(const Row &rhs)
 {
-	// finish
-	Row result(1);
-	return result;
+	if (this != &rhs)
+	{
+		length = rhs.length;
+		delete[] row_data;
+		row_data = new double[length];
+		for (int i = 0; i < length; i++)
+		{
+			this->row_data[i] = rhs.row_data[i];
+		}
+	}
+	return *this;
 }
 
 // clear row data
