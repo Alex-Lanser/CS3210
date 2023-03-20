@@ -15,16 +15,49 @@ Database g()
 class myInt
 {
 public:
-    int i;
-    myInt operator+(myInt rhs)
+    myInt(int x) : i(x) // i(x) does the same thing as i = x; i(x) can be used if i is const while i = x cannot
+    {
+        // i = x;
+    }
+    myInt() : i(0)
+    {
+        // i = 0;
+    }
+    // named constructor
+    myInt myIntOne()
+    {
+        return myInt(1);
+    }
+    myInt operator+(const myInt &rhs) const
     {
         cout << "operator+" << endl;
-        myInt result;
-        result.i = this->i + rhs.i;
+        myInt result(this->i + rhs.i);
         return result;
     }
+    myInt operator+(const int &rhs) const
+    {
+        cout << "operator+ (int rhs)" << endl;
+        myInt result(this->i + rhs);
+        return result;
+    }
+    friend myInt operator+(const int &lhs, const myInt &rhs);
+    friend ostream &operator<<(ostream &os, const myInt &rhs);
+
+private:
+    int i;
 };
 
+myInt operator+(const int &lhs, const myInt &rhs) 
+{
+    cout << "operator+ (int lhs)" << endl;
+    return rhs + lhs;
+}
+
+ostream &operator<<(ostream &os, const myInt &rhs)
+{
+    os << rhs.i << " ";
+    return os;
+}
 int main()
 {
     Database D1(3);
@@ -48,3 +81,6 @@ int main()
     // D1.print_first_data();
     return 0;
 };
+
+
+// Rule of 3 - Have all 3 or none: Destructor, Copy Constructor, Copy Assignment Operator
