@@ -61,7 +61,7 @@ Matrix Matrix::identity(unsigned int size)
 	}
 }
 
-// Matrix addition
+// Matrix addition.
 Matrix Matrix::operator+(const Matrix &rhs) const
 {
 	// Check size is correct
@@ -75,7 +75,7 @@ Matrix Matrix::operator+(const Matrix &rhs) const
 	{
 		for (int j = 0; j < cols; j++)
 		{
-			result[i][j] = (*this)[i][j]; // not the_matrix[i][j]
+			result[i][j] = (*this)[i][j] + rhs[i][j]; // not the_matrix[i][j]
 		}
 	}
 	return result;
