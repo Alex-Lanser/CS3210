@@ -4,9 +4,10 @@ using namespace std;
 
 int main()
 {
-	double a[3][3], b[3][3] c[2][3];
+	double a[3][3], b[3][3], c[2][3];
 
 	double num = 0;
+	cout << "Matrix A" << endl;
 	for (int i = 0; i < 3; i++)
 	{
 		cout << "[ ";
@@ -19,7 +20,9 @@ int main()
 		cout << "]" << endl;
 	}
 	cout << endl;
+
 	num = 8;
+	cout << "Matrix B" << endl;
 	for (int i = 0; i < 3; i++)
 	{
 		cout << "[ ";
@@ -32,16 +35,24 @@ int main()
 		cout << "]" << endl;
 	}
 	cout << endl;
+
 	num = 0;
-	for (in i = 0; i < 2; i++)
+	cout << "Matrix C" << endl;
+	for (int i = 0; i < 2; i++)
 	{
+		cout << "[ ";
 		for (int j = 0; j < 3; j++)
 		{
-			
+			c[i][j] = num;
+			cout << c[i][j] << " ";
+			num += 1;
 		}
+		cout << "]" << endl;
 	}
+	cout << endl;
 
-		double added[3][3];
+	cout << "Add Matrices" << endl;
+	double added[3][3];
 	for (int i = 0; i < 3; i++)
 	{
 		cout << "[ ";
@@ -54,6 +65,7 @@ int main()
 	}
 	cout << endl;
 
+	cout << "Identity" << endl;
 	double identity[3][3];
 	for (int i = 0; i < 3; i++)
 	{
@@ -74,17 +86,17 @@ int main()
 	}
 	cout << endl;
 
-	double transpose[3][3];
+	cout << "Transponse" << endl;
+	double transpose[3][2];
 	for (int i = 0; i < 3; i++)
 	{
 		cout << "[ ";
-		for (int j = 0; j < 3; j++)
+		for (int j = 0; j < 2; j++)
 		{
-			transpose[j][i] = b[i][j];
+			transpose[j][i] = c[i][j];
 			cout << transpose[i][j] << " ";
 		}
 		cout << "]" << endl;
 	}
-
 	return 0;
 }

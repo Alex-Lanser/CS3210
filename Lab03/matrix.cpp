@@ -11,23 +11,37 @@ Matrix::Matrix(int rows, int cols)
 	}
 	this->rows = rows;
 	this->cols = cols;
+	the_matrix = new Row *[rows];
+	for (int i = 0; i < rows; i++)
+	{
+		the_matrix[i] = new Row(cols);
+	}
+	
 }
 
 // Copy constructor
 Matrix::Matrix(const Matrix &from)
 {
-	this->rows = from.rows;
-	this->cols = from.cols;
-	// this->the_matrix = from.the_matrix;
+	rows = from.rows;
+	cols = from.cols;
+	the_matrix = new Row *[rows];
+	for (int i = 0; i < rows; i++)
+	{
+		(*this)[i][j] = from[i][j];
+	}
 }
 
 // Destructor
 Matrix::~Matrix()
 {
+	for (int i = 0; i < rows; i++)
+	{
+		delete the_matrix[i];
+	}
 	delete[] the_matrix;
 }
 
-// Assignment operator
+// Assignment operator. Check row.cpp from Lab 2 to see more accurately how to do this.
 Matrix &Matrix::operator=(const Matrix &rhs)
 {
 	Matrix result(rhs.rows, rhs.cols);
