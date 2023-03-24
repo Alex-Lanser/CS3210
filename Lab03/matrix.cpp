@@ -16,7 +16,6 @@ Matrix::Matrix(int rows, int cols)
 	{
 		the_matrix[i] = new Row(cols);
 	}
-	
 }
 
 // Copy constructor
@@ -27,7 +26,10 @@ Matrix::Matrix(const Matrix &from)
 	the_matrix = new Row *[rows];
 	for (int i = 0; i < rows; i++)
 	{
-		(*this)[i][j] = from[i][j];
+		for (int j = 0; j < cols; j++)
+		{
+			(*this)[i][j] = from[i][j];
+		}
 	}
 }
 
@@ -193,7 +195,7 @@ Row Matrix::operator[](unsigned int row) const
 	return *(the_matrix[row]);
 }
 
-// global insertion operator
+// global insertion operator ios_base
 std::ostream &operator<<(std::ostream &os, const Matrix &rhs)
 {
 	// finish
