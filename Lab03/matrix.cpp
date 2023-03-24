@@ -197,7 +197,7 @@ Row Matrix::operator[](unsigned int row) const
 	return *(the_matrix[row]);
 }
 
-// global insertion operator ios_base
+// global insertion operator... ios_base
 std::ostream &operator<<(std::ostream &os, const Matrix &rhs)
 {
 
