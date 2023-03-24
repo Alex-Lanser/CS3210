@@ -46,15 +46,16 @@ Matrix::~Matrix()
 // Assignment operator. Check row.cpp from Lab 2 to see more accurately how to do this.
 Matrix &Matrix::operator=(const Matrix &rhs)
 {
-	Matrix result(rhs.rows, rhs.cols);
-	for (int i = 0; i < result.rows; i++)
+	rows = rhs.rows;
+	cols = rhs.cols;
+	for (int i = 0; i < rhs.rows; i++)
 	{
-		for (int j = 0; j < result.cols; j++)
+		for (int j = 0; j < rhs.cols; j++)
 		{
-			result[i][j] = rhs[i][j];
+			(*this)[i][j] = rhs[i][j];
 		}
 	}
-	return result;
+	return *this;
 }
 
 // Named Constructor
@@ -75,6 +76,7 @@ Matrix Matrix::identity(unsigned int size)
 			}
 		}
 	}
+	return result;
 }
 
 // Matrix addition.
@@ -198,5 +200,5 @@ Row Matrix::operator[](unsigned int row) const
 // global insertion operator ios_base
 std::ostream &operator<<(std::ostream &os, const Matrix &rhs)
 {
-	// finish
+
 }
