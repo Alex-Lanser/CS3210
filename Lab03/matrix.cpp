@@ -110,9 +110,9 @@ Matrix Matrix::operator*(const Matrix &rhs) const
 	Matrix result(rows, rhs.cols);
 	for (int i = 0; i < result.rows; i++)
 	{
-		for (int j = 0; j < result.cols; j++)
+		for (int j = 0; j < rhs.cols; j++)
 		{
-			for (int k = 0; k < rhs.cols; k++)
+			for (int k = 0; k < cols; k++)
 			{
 				result[i][j] += (*this)[i][k] * rhs[k][j];
 			}
@@ -200,5 +200,15 @@ Row Matrix::operator[](unsigned int row) const
 // global insertion operator... ios_base
 std::ostream &operator<<(std::ostream &os, const Matrix &rhs)
 {
+	for (int i = 0; i < rhs.rows; i++)
+	{
+		os << "[ ";
+		for(int j = 0; j < rhs.cols; j++)
+		{
+			os << rhs[i][j] << " ";
+		}
+		os << "]" << endl;
+	}
 
+	return os;
 }

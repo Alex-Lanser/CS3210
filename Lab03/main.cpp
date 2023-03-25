@@ -7,130 +7,121 @@ int main()
 	Matrix matrix1(3, 3);
 	Matrix matrix2(3, 3);
 	Matrix matrix3(2, 3);
+	Matrix matrix4(3, 2);
 
 	cout << "Matrix 1" << endl;
 	double num = 0;
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < 3; i++) // Matrix1 Population
 	{
-		cout << "[ ";
 		for (int j = 0; j < 3; j++)
 		{
 			matrix1[i][j] = num;
 			num += 1;
-			cout << matrix1[i][j] << " ";
 		}
-		cout << "]" << endl;
 	}
-	cout << endl;
+	cout << matrix1 << endl;
 
 	cout << "Matrix 2" << endl;
 	num = 8;
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < 3; i++) // Matrix2 Population
 	{
-		cout << "[ ";
 		for (int j = 0; j < 3; j++)
 		{
 			matrix2[i][j] = num;
-			cout << matrix2[i][j] << " ";
 			num -= 1;
 		}
-		cout << "]" << endl;
 	}
-	cout << endl;
+	cout << matrix2 << endl;
 
 	cout << "Matrix 3" << endl;
 	num = 0;
-	for (int i = 0; i < 2; i++)
+	for (int i = 0; i < 2; i++) // Matrix3 Population
 	{
-		cout << "[ ";
 		for (int j = 0; j < 3; j++)
 		{
 			matrix3[i][j] = num;
 			num += 1;
-			cout << matrix2[i][j] << " ";
 		}
-		cout << "]" << endl;
 	}
-	cout << endl;
+	cout << matrix3 << endl;
 
-	Matrix identity = Matrix::identity(3);
-	cout << "Identity matrix" << endl;
-	for (int i = 0; i < 3; i++)
+	cout << "Matrix 4" << endl;
+	num = 5;
+	for (int i = 0; i < 3; i++) // Matrix4 Population
 	{
-		cout << "[ ";
-		for (int j = 0; j < 3; j++)
+		for (int j = 0; j < 2; j++)
 		{
-			cout << identity[i][j] << " ";
+			matrix4[i][j] = num;
+			num -= 1;
 		}
-		cout << "]" << endl;
 	}
-	cout << endl;
+	cout << matrix4 << endl;
+
+	cout << "Identity matrix" << endl;
+	Matrix identity = Matrix::identity(3);
+	cout << identity << endl;
+
+	cout << "Transpose of a 3x3 matrix (Matrix 1)" << endl;
+	Matrix transpose1 = ~matrix1;
+	cout << transpose1 << endl;
+
+	cout << "Transpose of a 2x3 matrix (Matrix 3)" << endl;
+	Matrix transpose2 = ~matrix3;
+	cout << transpose2 << endl;
 
 	cout << "Add same size matrix" << endl;
 	Matrix matrixAdd(3, 3);
 	matrixAdd = matrix1 + matrix2;
-	for (int i = 0; i < 3; i++)
-	{
-		cout << "[ ";
-		for (int j = 0; j < 3; j++)
-		{
-			cout << matrixAdd[i][j] << " ";
-		}
-		cout << "]" << endl;
-	}
-	cout << endl;
+	cout << matrixAdd << endl;
 
 	cout << "Add 2 different size matrices" << endl;
 	try
 	{
 		matrixAdd = matrix1 + matrix3;
 	}
-	catch(...)
+	catch (...)
 	{
-		cout << "Caught adding 2 different sized matrices." << endl << endl;
+		cout << "Caught adding 2 different sized matrices." << endl
+			 << endl;
 	}
 
 	cout << "Multiply 2 same size matrices" << endl;
-	Matrix matrixMult(3, 3);
-	matrixMult = matrix1 * matrix2;
-	for (int i = 0; i < 3; i++)
+	Matrix matrixMult3x3(3, 3);
+	matrixMult3x3 = matrix1 * matrix2;
+	cout << matrixMult3x3 << endl;
+
+	cout << "Multiply 2 different sized matrices properly (2x3)*(3x2)" << endl;
+	Matrix matrixMult2x2(2, 2); // matrix3 * matrix4
+	matrixMult2x2 = matrix3 * matrix4;
+	cout << matrixMult2x2 << endl;
+
+	cout << "Multiply 2 different sized matrices properly (3x2)*(2x3)" << endl;
+	matrixMult3x3 = matrix4 * matrix3;
+	cout << matrixMult3x3 << endl;
+
+	cout << "Multiply 2 different sized matrices improperly (3x3)*(2x3)" << endl;
+	try
 	{
-		cout << "[ ";
-		for (int j = 0; j < 3; j++)
-		{
-			cout << matrixMult[i][j] << " ";
-		}
-		cout << "]" << endl;
+		matrixMult3x3 = matrix1 * matrix3;
 	}
-	cout << endl;
+	catch (...)
+	{
+		cout << "Caught multiplying improper sized matrices" << endl
+			 << endl;
+	}
 
 	cout << "Multiply scalar multiple. Matrix * scalar" << endl;
 	Matrix scalarMult1(3, 3);
 	scalarMult1 = matrix1 * 4;
-	for (int i = 0; i < 3; i++)
-	{
-		cout << "[ ";
-		for (int j = 0; j < 3; j++)
-		{
-			cout << scalarMult1[i][j] << " ";
-		}
-		cout << "]" << endl;
-	}
-	cout << endl;
+	cout << scalarMult1 << endl;
 
 	cout << "Multiply scalar multiple. Scalar * matrix" << endl;
 	Matrix scalarMult2(3, 3);
 	scalarMult2 = 4 * matrix1;
-	for (int i = 0; i < 3; i++)
-	{
-		cout << "[ ";
-		for (int j = 0; j < 3; j++)
-		{
-			cout << scalarMult2[i][j] << " ";
-		}
-		cout << "]" << endl;
-	}
-	cout << endl;
+	cout << scalarMult2 << endl;
 
+	cout << "Clear a matrix (Matrix 2)" << endl;
+	matrix2.clear();
+	cout << matrix2 << endl;
 	return 0;
 }
