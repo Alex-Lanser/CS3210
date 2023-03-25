@@ -123,5 +123,6 @@ int main()
 	cout << "Clear a matrix (Matrix 2)" << endl;
 	matrix2.clear();
 	cout << matrix2 << endl;
+
 	return 0;
 }
