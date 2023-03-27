@@ -4,3 +4,6 @@ Access Modifiers
 private(default)      N        N       Y      Y
 protected             N        Y       Y      Y
 public                Y        Y       Y      Y
+
+Inheritance Access Modifiers
+Can make access more restrictive but not less restrictive
