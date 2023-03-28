@@ -200,14 +200,15 @@ Row Matrix::operator[](unsigned int row) const
 // global insertion operator... ios_base
 std::ostream &operator<<(std::ostream &os, const Matrix &rhs)
 {
+	os.precision(2);
 	for (int i = 0; i < rhs.rows; i++)
 	{
 		cout << "[";
 		for (int j = 0; j < rhs.cols; j++)
 		{
-			os.precision(2);
-			os.width(3);
+			os << setw(4);
 			os << rhs[i][j];
+			os << setw(4);
 		}
 		os << "]" << endl;
 	}
