@@ -26,9 +26,10 @@ Matrix::Matrix(const Matrix &from)
 	the_matrix = new Row *[rows];
 	for (int i = 0; i < rows; i++)
 	{
+		the_matrix[i] = new Row(cols);
 		for (int j = 0; j < cols; j++)
 		{
-			(*this)[i][j] = from[i][j];
+			the_matrix[i][j] = from[i][j];
 		}
 	}
 }
