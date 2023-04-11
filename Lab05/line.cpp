@@ -1,12 +1,23 @@
 #include <iostream>
 #include "line.h"
 #include "shape.h"
+#include "x11context.h"
+#include "drawbase.h"
+#include "gcontext.h"
 #include "matrix.h"
 using namespace std;
 
 Line::Line(int x0, int y0, int x1, int y1, unsigned int color)
 {
-    
+    this->coord0[0][0] = x0;
+    this->coord0[0][1] = y0;
+    this->coord0[0][2] = 0;
+    this->coord0[0][3] = 1;
+
+    this->coord1[0][0] = x1;
+    this->coord1[0][1] = y1;
+    this->coord1[0][2] = 0;
+    this->coord1[0][3] = 1;
 }
 
 Shape *Line::clone()
@@ -14,6 +25,8 @@ Shape *Line::clone()
     return new Line(*this);
 }
 
-void Line::clone(GraphicsContext *gc)
+void Line::draw(GraphicsContext *gc)
 {
+    gc->setColor(color);
+    gc->drawLine(coord0[0][0], coord0[0][1], coord1[0][0], coord1[0][1]);
 }
