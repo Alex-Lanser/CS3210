@@ -9,7 +9,7 @@ using namespace std;
 class Shape
 {
 public:
-    virtual ~Shape();
+    virtual ~Shape(){};
     virtual void draw(GraphicsContext *) = 0;
     virtual Shape *clone() = 0;
 
