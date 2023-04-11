@@ -1,0 +1,10 @@
+Image class
+    Container of shape*     - STL containers
+
+Shape class
+    Line and triangle inherit shape
+    Line - 2 points
+    Triangle - 3 points
+    draw(GraphicContext*)
+    friend class Image
+    constructors private
