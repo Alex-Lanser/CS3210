@@ -9,15 +9,27 @@
 using namespace std;
 
 // Constructor
-Image::Image()
+Image::Image(vector<Shape *> newShapes)
 {
-    vector<Shape *> shapes;
+    shapes = newShapes;
 }
 
 // Copy Constructor
-Image::Image(const Image &from)
+Image::Image(vector<Shape *> const &from)
 {
-    vector<Shape *> shapes = from;
+    for (int i = 0; i < from.size(); i++)
+    {
+        shapes[i].push_back(from[i]->clone());
+    }
 }
 
 // Destructor
+Image::~Image()
+{
+    for (int i = 0; i < shapes.size(); i++)
+    {
+        delete shapes[i];
+    }
+    shapes.clear();
+}
+

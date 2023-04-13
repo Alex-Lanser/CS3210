@@ -11,7 +11,7 @@ using namespace std;
 class Image
 {
 public:
-    Image::Image(); 
+    Image::Image(vector<Shape *> newShapes); 
     Image::Image(const Image &from);
     Image::~Image();
     Image &Image::operator=(const Image &rhs);
@@ -21,6 +21,7 @@ public:
     void erase();
 
 private:
+    Image::clone();
     vector<Shape *> shapes;
 };
 
