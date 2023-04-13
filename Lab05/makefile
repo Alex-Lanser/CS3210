@@ -2,7 +2,7 @@ CC = g++
 EXECUTABLE = main
 CFLAGS = -c -MMD
 LINKFLAG = -lX11
-SOURCES = line.cpp matrix.cpp row.cpp gcontext.cpp x11context.cpp main.cpp
+SOURCES = line.cpp triangle.cpp image.cpp matrix.cpp row.cpp gcontext.cpp x11context.cpp main.cpp 
 OBJECTS = $(SOURCES:.cpp=.o)
 
 $(EXECUTABLE):$(OBJECTS)

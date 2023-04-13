@@ -14,7 +14,7 @@ public:
     virtual Shape *clone() = 0;
 
 private:
-    int color;
+    unsigned int color;
 };
 
 #endif
