@@ -1,5 +1,5 @@
 #include <iostream>
-#include "line.h"
+#include "triangle.h"
 #include "shape.h"
 #include "x11context.h"
 #include "drawbase.h"
