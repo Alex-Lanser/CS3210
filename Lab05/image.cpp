@@ -20,9 +20,9 @@ Image::Image()
 // Copy Constructor
 Image::Image(const Image &from)
 {
-    for (int i = 0; i < from.size(); i++)
+    for (int i = 0; i < from.shapes.size(); i++)
     {
-        shapes[i].push_back(from.shapes[i]->clone());
+        shapes.push_back(from.shapes[i]->clone());
     }
 }
 
@@ -47,18 +47,21 @@ void Image::operator=(const Image &rhs)
 void Image::addLine(int x0, int y0, int x1, int y1, unsigned int color)
 {
     Line line(x0, y0, x1, y1, color);
-    line.draw(gc);
+    shapes.push_back(&line);
 }
 
 void Image::addTriangle(int x0, int y0, int x1, int y1, int x2, int y2, unsigned int color)
 {
     Triangle triangle(x0, y0, x1, y1, x2, y2, color);
-    triangle.draw(gc);
+    shapes.push_back(&triangle);
 }
 
 void Image::draw(GraphicsContext *gc)
 {
-
+    for (int i = 0; i < shapes.size(); i++)
+    {
+        shapes[i]->draw(gc);
+    }
 }
 
 void Image::erase()
