@@ -59,8 +59,10 @@ void Image::addTriangle(int x0, int y0, int x1, int y1, int x2, int y2, unsigned
 // Draw all lines/triangles in the shapes container
 void Image::draw(GraphicsContext *gc)
 {
+
     for (int i = 0; i < shapes.size(); i++)
     {
+        cout << "Got here" << endl;
         shapes[i]->draw(gc);
     }
 }

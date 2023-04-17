@@ -32,7 +32,6 @@ Shape *Line::clone()
 // Draw the line
 void Line::draw(GraphicsContext *gc)
 {
-    cout << "Got here" << endl;
     gc->setColor(color);
     gc->drawLine(coord0[0][0], coord0[1][0], coord1[0][0], coord1[1][0]);
 }
