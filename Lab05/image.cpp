@@ -10,8 +10,6 @@
 #include "image.h"
 using namespace std;
 
-
-GraphicsContext *gc = new X11Context(800, 600, GraphicsContext::BLACK);
 // Constructor
 Image::Image()
 {
@@ -44,18 +42,21 @@ void Image::operator=(const Image &rhs)
     }
 }
 
+// Add a line to the shapes container
 void Image::addLine(int x0, int y0, int x1, int y1, unsigned int color)
 {
     Line line(x0, y0, x1, y1, color);
     shapes.push_back(&line);
 }
 
+// Add a triangle to the shapes container
 void Image::addTriangle(int x0, int y0, int x1, int y1, int x2, int y2, unsigned int color)
 {
     Triangle triangle(x0, y0, x1, y1, x2, y2, color);
     shapes.push_back(&triangle);
 }
 
+// Draw all lines/triangles in the shapes container
 void Image::draw(GraphicsContext *gc)
 {
     for (int i = 0; i < shapes.size(); i++)
@@ -64,7 +65,12 @@ void Image::draw(GraphicsContext *gc)
     }
 }
 
+// Erase all shapes and return all dynamic memory
 void Image::erase()
 {
-
+    for (int i = 0; i < shapes.size(); i++)
+    {
+        delete shapes[i];
+    }
+    shapes.clear();
 }
