@@ -1,2 +1,2 @@
-main.o: main.cpp image.h shape.h x11context.h gcontext.h matrix.h row.h \
- line.h triangle.h
+main.o: main.cpp x11context.h gcontext.h mydrawing.h drawbase.h image.h \
+ shape.h matrix.h row.h line.h triangle.h
