@@ -23,13 +23,14 @@ Matrix::Matrix(const Matrix &from)
 {
 	rows = from.rows;
 	cols = from.cols;
+
 	the_matrix = new Row *[rows];
 	for (int i = 0; i < rows; i++)
 	{
 		the_matrix[i] = new Row(cols);
 		for (int j = 0; j < cols; j++)
 		{
-			the_matrix[i][j] = from[i][j];
+			(*the_matrix[i])[j] = from[i][j];
 		}
 	}
 }
@@ -47,16 +48,24 @@ Matrix::~Matrix()
 // Assignment operator. Check row.cpp from Lab 2 to see more accurately how to do this.
 Matrix &Matrix::operator=(const Matrix &rhs)
 {
+	for (int i = 0; i < rows; i++)
+	{
+		delete the_matrix[i];
+	}
+	delete[] the_matrix;
+
 	rows = rhs.rows;
 	cols = rhs.cols;
-	for (int i = 0; i < rhs.rows; i++)
+	the_matrix = new Row *[rows];
+	for (int i = 0; i < rows; i++)
 	{
-		for (int j = 0; j < rhs.cols; j++)
+		the_matrix[i] = new Row(cols);
+		for (int j = 0; j < cols; j++)
 		{
-			(*this)[i][j] = rhs[i][j];
+			(*the_matrix[i])[j] = rhs[i][j];
 		}
 	}
-	return *this;
+	return (*this);
 }
 
 // Named Constructor

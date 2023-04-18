@@ -13,7 +13,7 @@ public:
     virtual void draw(GraphicsContext *) = 0;
     virtual Shape *clone() = 0;
 
-private:
+protected:
     unsigned int color;
 };
 

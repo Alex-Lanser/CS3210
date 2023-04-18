@@ -16,7 +16,6 @@ public:
 private:
     Matrix coord0 = Matrix(4, 1);
     Matrix coord1 = Matrix(4, 1);
-    unsigned int color;
 };
 
 #endif

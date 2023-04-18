@@ -27,42 +27,35 @@ Image::Image(const Image &from)
 // Destructor
 Image::~Image()
 {
-    for (int i = 0; i < shapes.size(); i++)
-    {
-        delete shapes[i];
-    }
-    shapes.clear();
+    erase();
 }
 
 void Image::operator=(const Image &rhs)
 {
+    erase();
     for (int i = 0; i < rhs.shapes.size(); i++)
     {
-        shapes[i] = rhs.shapes[i];
+        shapes.push_back(rhs.shapes[i]->clone());
     }
 }
 
 // Add a line to the shapes container
 void Image::addLine(int x0, int y0, int x1, int y1, unsigned int color)
 {
-    Line line(x0, y0, x1, y1, color);
-    shapes.push_back(&line);
+    shapes.push_back(new Line(x0, y0, x1, y1, color));
 }
 
 // Add a triangle to the shapes container
 void Image::addTriangle(int x0, int y0, int x1, int y1, int x2, int y2, unsigned int color)
 {
-    Triangle triangle(x0, y0, x1, y1, x2, y2, color);
-    shapes.push_back(&triangle);
+    shapes.push_back(new Triangle(x0, y0, x1, y1, x2, y2, color));
 }
 
 // Draw all lines/triangles in the shapes container
 void Image::draw(GraphicsContext *gc)
 {
-
     for (int i = 0; i < shapes.size(); i++)
     {
-        cout << "Got here" << endl;
         shapes[i]->draw(gc);
     }
 }

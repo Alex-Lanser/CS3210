@@ -7,7 +7,7 @@ Row::Row(int length)
 {
 	if (length <= 0)
 	{
-		throw std::out_of_range("The length has to be greater than 0");
+		throw std::out_of_range("The length of the row has to be greater than 0");
 	}
 	this->length = length; // this->length is making the length for the Row, while length is the length that is input
 	row_data = new double[length];
