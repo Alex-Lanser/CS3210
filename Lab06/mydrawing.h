@@ -16,6 +16,7 @@ public:
 
 private:
     Image im;
+    Image copyIm;
     // We will only support one "remembered" line
     int x0;
     int y0;
@@ -24,6 +25,8 @@ private:
     int numClicks;
     bool dragging; // flag to know if we are dragging
     int mode;      // 0 == line, 1 == triangle
+    int numShapes;
     unsigned int color;
+    void undoShape();
 };
 #endif

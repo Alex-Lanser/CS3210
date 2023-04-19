@@ -13,7 +13,10 @@ MyDrawing::MyDrawing()
     cout << "6: Green" << endl;
     cout << "Press T to draw a triangle." << endl;
     cout << "Press L to draw a line." << endl;
-    numClicks = 0;
+    cout << "To undo previous shape, press backspace." << endl;
+    numClicks = 0; // Track the number of clicks
+    mode = 0; // Default mode is line
+    numShapes = 0;
 }
 void MyDrawing::paint(GraphicsContext *gc)
 {
@@ -34,6 +37,7 @@ void MyDrawing::mouseButtonDown(GraphicsContext *gc, unsigned int button, int x,
             gc->drawLine(x0, y0, x, y);
             im.addLine(x0, y0, x1, y1, color);
             numClicks = 0;
+            numShapes++;
         }
     }
     else if (mode == 1) // Triangle
@@ -57,8 +61,14 @@ void MyDrawing::mouseButtonDown(GraphicsContext *gc, unsigned int button, int x,
             gc->drawLine(x1, y1, x, y);
             im.addTriangle(x0, y0, x1, y1, x, y, color);
             numClicks = 0;
+            numShapes++;
         }
     }
+}
+void MyDrawing::undoShape()
+{
+    copyIm = im;
+    
 }
 void MyDrawing::keyDown(GraphicsContext *gc, unsigned int keycode)
 {
@@ -93,6 +103,9 @@ void MyDrawing::keyDown(GraphicsContext *gc, unsigned int keycode)
         break;
     case 0x74: // T key
         mode = 1;
+        break;
+    case 0xFF08:
+        undoShape();
         break;
     }
 }
