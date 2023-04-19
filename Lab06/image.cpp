@@ -69,3 +69,10 @@ void Image::erase()
     }
     shapes.clear();
 }
+
+Image Image::undoShape(Image im)
+{
+    Image result = im;
+    delete result.shapes[result.shapes.size()-1];
+    return result;
+}
