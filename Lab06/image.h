@@ -20,7 +20,7 @@ public:
     void addTriangle(int x0, int y0, int x1, int y1, int x2, int y2, unsigned int color);
     void draw(GraphicsContext *gc);
     void erase();
-    Image undoShape(const Image im);
+    Image undoShape(Image im);
 
 private:
     vector<Shape *> shapes;

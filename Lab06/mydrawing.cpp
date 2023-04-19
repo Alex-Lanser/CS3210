@@ -15,7 +15,7 @@ MyDrawing::MyDrawing()
     cout << "Press L to draw a line." << endl;
     cout << "To undo previous shape, press backspace." << endl;
     numClicks = 0; // Track the number of clicks
-    mode = 0; // Default mode is line
+    mode = 0;      // Default mode is line
     numShapes = 0;
 }
 void MyDrawing::paint(GraphicsContext *gc)
@@ -65,10 +65,11 @@ void MyDrawing::mouseButtonDown(GraphicsContext *gc, unsigned int button, int x,
         }
     }
 }
-void MyDrawing::undoShape()
+void MyDrawing::undoShape(GraphicsContext *gc)
 {
-    copyIm = im;
-    
+    gc->clear();
+    im = im.undoShape(im);
+    paint(gc);
 }
 void MyDrawing::keyDown(GraphicsContext *gc, unsigned int keycode)
 {
@@ -105,7 +106,7 @@ void MyDrawing::keyDown(GraphicsContext *gc, unsigned int keycode)
         mode = 1;
         break;
     case 0xFF08:
-        undoShape();
+        undoShape(gc);
         break;
     }
 }

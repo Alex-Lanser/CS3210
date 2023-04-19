@@ -27,6 +27,6 @@ private:
     int mode;      // 0 == line, 1 == triangle
     int numShapes;
     unsigned int color;
-    void undoShape();
+    void undoShape(GraphicsContext *gc);
 };
 #endif
