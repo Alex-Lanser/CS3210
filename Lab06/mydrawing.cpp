@@ -105,7 +105,7 @@ void MyDrawing::keyDown(GraphicsContext *gc, unsigned int keycode)
     case 0x74: // T key
         mode = 1;
         break;
-    case 0xFF08:
+    case 0xFF08: // Backspace key
         undoShape(gc);
         break;
     }
