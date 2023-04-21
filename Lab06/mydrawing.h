@@ -23,9 +23,7 @@ private:
     int x1;
     int y1;
     int numClicks;
-    bool dragging; // flag to know if we are dragging
     int mode;      // 0 == line, 1 == triangle
-    int numShapes;
     unsigned int color;
     void undoShape(GraphicsContext *gc);
 };

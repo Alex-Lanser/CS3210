@@ -16,8 +16,7 @@ MyDrawing::MyDrawing()
     cout << "To undo previous shape, press backspace." << endl;
     numClicks = 0; // Track the number of clicks
     mode = 0;      // Default mode is line
-    numShapes = 0;  
-    color = GraphicsContext::GREEN;
+    color = GraphicsContext::GREEN; // Default color is green
 }
 void MyDrawing::paint(GraphicsContext *gc)
 {
@@ -27,23 +26,22 @@ void MyDrawing::mouseButtonDown(GraphicsContext *gc, unsigned int button, int x,
 {
     if (mode == 0) // Line
     {
-        if (numClicks == 0)
+        if (numClicks == 0) // 1st click
         {
             x0 = x;
             y0 = y;
             numClicks++;
         }
-        else // 2nd click
+        else // 2nd click. Draw line
         {
             gc->drawLine(x0, y0, x, y);
             im.addLine(x0, y0, x, y, color);
             numClicks = 0;
-            numShapes++;
         }
     }
     else if (mode == 1) // Triangle
     {
-        if (numClicks == 0)
+        if (numClicks == 0) // 1st click
         {
             x0 = x;
             y0 = y;
@@ -55,14 +53,13 @@ void MyDrawing::mouseButtonDown(GraphicsContext *gc, unsigned int button, int x,
             y1 = y;
             numClicks++;
         }
-        else // 3rd click
+        else // 3rd click. Draw triangle
         {
             gc->drawLine(x0, y0, x1, y1);
             gc->drawLine(x0, y0, x, y);
             gc->drawLine(x1, y1, x, y);
             im.addTriangle(x0, y0, x1, y1, x, y, color);
             numClicks = 0;
-            numShapes++;
         }
     }
 }
@@ -101,10 +98,10 @@ void MyDrawing::keyDown(GraphicsContext *gc, unsigned int keycode)
         color = GraphicsContext::GREEN;
         break;
     case 0x6C: // L key
-        mode = 0;
+        mode = 0; // Line mode
         break;
     case 0x74: // T key
-        mode = 1;
+        mode = 1; // Triangle mode
         break;
     case 0xFF08: // Backspace key
         undoShape(gc);
