@@ -35,7 +35,7 @@ void MyDrawing::mouseButtonDown(GraphicsContext *gc, unsigned int button, int x,
         else // 2nd click
         {
             gc->drawLine(x0, y0, x, y);
-            im.addLine(x0, y0, x1, y1, color);
+            im.addLine(x0, y0, x, y, color);
             numClicks = 0;
             numShapes++;
         }
@@ -105,7 +105,7 @@ void MyDrawing::keyDown(GraphicsContext *gc, unsigned int keycode)
     case 0x74: // T key
         mode = 1;
         break;
-    case 0xFF08:
+    case 0xFF08: // Backspace key
         undoShape(gc);
         break;
     }
