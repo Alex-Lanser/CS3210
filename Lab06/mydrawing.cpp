@@ -17,6 +17,7 @@ MyDrawing::MyDrawing()
     numClicks = 0; // Track the number of clicks
     mode = 0;      // Default mode is line
     numShapes = 0;
+    color = GraphicsContext::GREEN;
 }
 void MyDrawing::paint(GraphicsContext *gc)
 {
