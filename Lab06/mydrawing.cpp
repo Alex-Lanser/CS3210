@@ -35,7 +35,7 @@ void MyDrawing::mouseButtonDown(GraphicsContext *gc, unsigned int button, int x,
         else // 2nd click
         {
             gc->drawLine(x0, y0, x, y);
-            im.addLine(x0, y0, x1, y1, color);
+            im.addLine(x0, y0, x, y, color);
             numClicks = 0;
             numShapes++;
         }

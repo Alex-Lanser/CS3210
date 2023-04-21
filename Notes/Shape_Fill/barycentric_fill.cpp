@@ -85,7 +85,7 @@ int main()
                 /*** THE GREEN RED AND BLUE COLOR COMPONENTS ARE THE 3
                  * VERTEX COLORS WEIGHTED BY THE BARYCENTRIC COORDINATES ***/
                 red = u * Acol.red + v * Bcol.red + w * Ccol.red;
-                green = u * Acol.green + v * Acol.green + w * Ccol.green;
+                green = u * Acol.green + v * Bcol.green + w * Ccol.green;
                 blue = u * Acol.blue + v * Bcol.blue + w * Ccol.blue;
                 color = (red << 16) + (green << 8) + blue;
                 gc->setColor(color);
