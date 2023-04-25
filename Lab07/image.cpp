@@ -8,6 +8,7 @@
 #include "gcontext.h"
 #include "matrix.h"
 #include "image.h"
+#include "viewcontext.h"
 using namespace std;
 
 // Constructor
@@ -52,11 +53,11 @@ void Image::addTriangle(int x0, int y0, int x1, int y1, int x2, int y2, unsigned
 }
 
 // Draw all lines/triangles in the shapes container
-void Image::draw(GraphicsContext *gc)
+void Image::draw(GraphicsContext *gc, ViewContext *vc)
 {
     for (int i = 0; i < shapes.size(); i++)
     {
-        shapes[i]->draw(gc);
+        shapes[i]->draw(gc, vc);
     }
 }
 

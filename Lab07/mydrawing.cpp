@@ -1,8 +1,10 @@
 #include "mydrawing.h"
 #include "gcontext.h"
+#include "viewcontext.h"
+using namespace std;
 
 // Constructor
-MyDrawing::MyDrawing()
+MyDrawing::MyDrawing(int width, int height)
 {
     cout << "COLORS:" << endl;
     cout << "1: White" << endl;
@@ -17,10 +19,19 @@ MyDrawing::MyDrawing()
     numClicks = 0; // Track the number of clicks
     mode = 0;      // Default mode is line
     color = GraphicsContext::GREEN; // Default color is green
+    vc = new ViewContext(width, height);
+    GraphicsContext *gc = new X11Context(800, 600, GraphicsContext::BLACK);
+    im.addLine(0, 0, 10, 10, color);
+    im.draw(gc, vc);
+}
+// Destructor
+MyDrawing::~MyDrawing()
+{
+    delete vc;
 }
 void MyDrawing::paint(GraphicsContext *gc)
 {
-    im.draw(gc);
+    im.draw(gc, vc);
 }
 void MyDrawing::mouseButtonDown(GraphicsContext *gc, unsigned int button, int x, int y)
 {

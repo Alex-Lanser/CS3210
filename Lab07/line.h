@@ -4,6 +4,7 @@
 #include <iostream>
 #include "shape.h"
 #include "matrix.h"
+#include "viewcontext.h"
 using namespace std;
 
 class Line : public Shape
@@ -11,7 +12,7 @@ class Line : public Shape
 public:
     Line(int x0, int y0, int x1, int y1, unsigned int color);
     Shape *clone();
-    void draw(GraphicsContext *gc);
+    void draw(GraphicsContext *gc, ViewContext *vc);
 
 private:
     Matrix coord0 = Matrix(4, 1);

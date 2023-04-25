@@ -7,6 +7,7 @@
 #include "matrix.h"
 #include "line.h"
 #include "triangle.h"
+#include "viewcontext.h"
 using namespace std;
 
 class Image
@@ -18,7 +19,7 @@ public:
     void operator=(const Image &rhs);
     void addLine(int x0, int y0, int x1, int y1, unsigned int color);
     void addTriangle(int x0, int y0, int x1, int y1, int x2, int y2, unsigned int color);
-    void draw(GraphicsContext *gc);
+    void draw(GraphicsContext *gc, ViewContext *vc);
     void erase();
     Image undoShape(Image im);
 

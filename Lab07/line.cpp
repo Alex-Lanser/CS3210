@@ -5,6 +5,7 @@
 #include "drawbase.h"
 #include "gcontext.h"
 #include "matrix.h"
+#include "viewcontext.h"
 using namespace std;
 
 // Line constructor
@@ -30,8 +31,12 @@ Shape *Line::clone()
 }
 
 // Draw the line
-void Line::draw(GraphicsContext *gc)
+void Line::draw(GraphicsContext *gc, ViewContext *vc)
 {
     gc->setColor(color);
-    gc->drawLine(coord0[0][0], coord0[1][0], coord1[0][0], coord1[1][0]);
+    Matrix point0 = vc->ModelToDevice(coord0);
+    Matrix point1 = vc->ModelToDevice(coord1);
+    cout << point0 << endl;
+    cout << point1 << endl;
+    gc->drawLine(point0[0][0], point0[1][0], point1[0][0], point1[1][0]);
 }

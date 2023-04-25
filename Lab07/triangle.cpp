@@ -5,6 +5,7 @@
 #include "drawbase.h"
 #include "gcontext.h"
 #include "matrix.h"
+#include "viewcontext.h"
 using namespace std;
 
 // Triangle constructor
@@ -35,7 +36,7 @@ Shape *Triangle::clone()
 }
 
 // Draw the triangle
-void Triangle::draw(GraphicsContext *gc)
+void Triangle::draw(GraphicsContext *gc, ViewContext *vc)
 {
     gc->setColor(color);
     gc->drawLine(coord0[0][0], coord0[1][0], coord1[0][0], coord1[1][0]);
