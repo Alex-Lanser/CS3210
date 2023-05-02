@@ -3,6 +3,7 @@
 #include "drawbase.h"
 #include "image.h"
 #include "viewcontext.h"
+#include "matrix.h"
 
 // forward reference
 class GraphicsContext;
@@ -29,6 +30,17 @@ private:
     unsigned int color;
     void undoShape(GraphicsContext *gc);
     ViewContext *vc;
+    void rotateClockwise(GraphicsContext *gc);
+    void rotateCounterclockwise(GraphicsContext *gc);
+    void scaleUp(GraphicsContext *gc);
+    void scaleDown(GraphicsContext *gc);
+    void translateUp(GraphicsContext *gc);
+    void translateRight(GraphicsContext *gc);
+    void translateDown(GraphicsContext *gc);
+    void translateLeft(GraphicsContext *gc);
 
+    Matrix coord0 = Matrix(4, 1);
+    Matrix coord1 = Matrix(4, 1);
+    Matrix coord2 = Matrix(4, 1);
 };
 #endif

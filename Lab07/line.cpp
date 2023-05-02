@@ -36,7 +36,5 @@ void Line::draw(GraphicsContext *gc, ViewContext *vc)
     gc->setColor(color);
     Matrix point0 = vc->ModelToDevice(coord0);
     Matrix point1 = vc->ModelToDevice(coord1);
-    cout << point0 << endl;
-    cout << point1 << endl;
     gc->drawLine(point0[0][0], point0[1][0], point1[0][0], point1[1][0]);
 }

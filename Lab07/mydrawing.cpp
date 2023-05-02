@@ -1,6 +1,7 @@
 #include "mydrawing.h"
 #include "gcontext.h"
 #include "viewcontext.h"
+#include "matrix.h"
 using namespace std;
 
 // Constructor
@@ -16,13 +17,14 @@ MyDrawing::MyDrawing(int width, int height)
     cout << "Press T to draw a triangle." << endl;
     cout << "Press L to draw a line." << endl;
     cout << "To undo previous shape, press backspace." << endl;
-    numClicks = 0; // Track the number of clicks
-    mode = 0;      // Default mode is line
+    cout << endl;
+    cout << "To translate the image, use the arrow keys respectively." << endl;
+    cout << "To rotate: Q-Counter Clockwise; E-Clockwise." << endl;
+    cout << "To scale: W-Scale up; S-Scale down." << endl;
+    numClicks = 0;                  // Track the number of clicks
+    mode = 0;                       // Default mode is line
     color = GraphicsContext::GREEN; // Default color is green
     vc = new ViewContext(width, height);
-    GraphicsContext *gc = new X11Context(800, 600, GraphicsContext::BLACK);
-    im.addLine(0, 0, 10, 10, color);
-    im.draw(gc, vc);
 }
 // Destructor
 MyDrawing::~MyDrawing()
@@ -46,7 +48,15 @@ void MyDrawing::mouseButtonDown(GraphicsContext *gc, unsigned int button, int x,
         else // 2nd click. Draw line
         {
             gc->drawLine(x0, y0, x, y);
-            im.addLine(x0, y0, x, y, color);
+            coord0[0][0] = x0;
+            coord0[1][0] = y0;
+            coord0[3][0] = 1;
+            coord1[0][0] = x;
+            coord1[1][0] = y;
+            coord1[3][0] = 1;
+            Matrix point0 = vc->DeviceToModel(coord0);
+            Matrix point1 = vc->DeviceToModel(coord1);
+            im.addLine(point0[0][0], point0[1][0], point1[0][0], point1[1][0], color);
             numClicks = 0;
         }
     }
@@ -69,7 +79,19 @@ void MyDrawing::mouseButtonDown(GraphicsContext *gc, unsigned int button, int x,
             gc->drawLine(x0, y0, x1, y1);
             gc->drawLine(x0, y0, x, y);
             gc->drawLine(x1, y1, x, y);
-            im.addTriangle(x0, y0, x1, y1, x, y, color);
+            coord0[0][0] = x0;
+            coord0[1][0] = y0;
+            coord0[3][0] = 1;
+            coord1[0][0] = x1;
+            coord1[1][0] = y1;
+            coord1[3][0] = 1;
+            coord2[0][0] = x;
+            coord2[1][0] = y;
+            coord2[3][0] = 1;
+            Matrix point0 = vc->DeviceToModel(coord0);
+            Matrix point1 = vc->DeviceToModel(coord1);
+            Matrix point2 = vc->DeviceToModel(coord2);
+            im.addTriangle(point0[0][0], point0[1][0], point1[0][0], point1[1][0], point2[0][0], point2[1][0], color);
             numClicks = 0;
         }
     }
@@ -78,6 +100,50 @@ void MyDrawing::undoShape(GraphicsContext *gc)
 {
     gc->clear();
     im = im.undoShape(im);
+    paint(gc);
+}
+void MyDrawing::rotateClockwise(GraphicsContext *gc)
+{
+    gc->clear();
+    paint(gc);
+}
+void MyDrawing::rotateCounterclockwise(GraphicsContext *gc)
+{
+    gc->clear();
+    paint(gc);
+}
+void MyDrawing::scaleUp(GraphicsContext *gc)
+{
+    gc->clear();
+    paint(gc);
+}
+void MyDrawing::scaleDown(GraphicsContext *gc)
+{
+    gc->clear();
+    paint(gc);
+}
+void MyDrawing::translateUp(GraphicsContext *gc)
+{
+    gc->clear();
+    vc->translateUp();
+    paint(gc);
+}
+void MyDrawing::translateRight(GraphicsContext *gc)
+{
+    vc->translateRight();
+    gc->clear();
+    paint(gc);
+}
+void MyDrawing::translateDown(GraphicsContext *gc)
+{
+    vc->translateDown();
+    gc->clear();
+    paint(gc);
+}
+void MyDrawing::translateLeft(GraphicsContext *gc)
+{
+    vc->translateLeft();
+    gc->clear();
     paint(gc);
 }
 void MyDrawing::keyDown(GraphicsContext *gc, unsigned int keycode)
@@ -108,14 +174,38 @@ void MyDrawing::keyDown(GraphicsContext *gc, unsigned int keycode)
         gc->setColor(GraphicsContext::GREEN);
         color = GraphicsContext::GREEN;
         break;
-    case 0x6C: // L key
+    case 0x6C:    // L key
         mode = 0; // Line mode
         break;
-    case 0x74: // T key
+    case 0x74:    // T key
         mode = 1; // Triangle mode
         break;
     case 0xFF08: // Backspace key
         undoShape(gc);
+        break;
+    case 0x65: // E (Rotate clockwise)
+        rotateClockwise(gc);
+        break;
+    case 0x71: // Q (Rotate counter clockwise)
+        rotateCounterclockwise(gc);
+        break;
+    case 0x77: // W Scale up
+        scaleUp(gc);
+        break;
+    case 0x73: // S Scale down
+        scaleDown(gc);
+        break;
+    case 0xFF52: // Up arrow translate up
+        translateUp(gc);
+        break;
+    case 0xFF53: // Right arrow translate right
+        translateRight(gc);
+        break;
+    case 0xFF54: // Down arrow translate down
+        translateDown(gc);
+        break;
+    case 0xFF51: // Left arrow translate left
+        translateLeft(gc);
         break;
     }
 }

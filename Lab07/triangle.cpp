@@ -39,7 +39,10 @@ Shape *Triangle::clone()
 void Triangle::draw(GraphicsContext *gc, ViewContext *vc)
 {
     gc->setColor(color);
-    gc->drawLine(coord0[0][0], coord0[1][0], coord1[0][0], coord1[1][0]);
-    gc->drawLine(coord0[0][0], coord0[1][0], coord2[0][0], coord2[1][0]);
-    gc->drawLine(coord1[0][0], coord1[1][0], coord2[0][0], coord2[1][0]);
+    Matrix point0 = vc->ModelToDevice(coord0);
+    Matrix point1 = vc->ModelToDevice(coord1);
+    Matrix point2 = vc->ModelToDevice(coord2);
+    gc->drawLine(point0[0][0], point0[1][0], point1[0][0], point1[1][0]);
+    gc->drawLine(point0[0][0], point0[1][0], point2[0][0], point2[1][0]);
+    gc->drawLine(point1[0][0], point1[1][0], point2[0][0], point2[1][0]);
 }
