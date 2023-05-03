@@ -210,7 +210,7 @@ Row Matrix::operator[](unsigned int row) const
 // global insertion operator... ios_base
 std::ostream &operator<<(std::ostream &os, const Matrix &rhs)
 {
-	os.precision(5);
+	os.precision(6);
 	for (int i = 0; i < rhs.rows; i++)
 	{
 		cout << "[";

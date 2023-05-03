@@ -114,6 +114,7 @@ void MyDrawing::rotateCounterclockwise(GraphicsContext *gc)
 }
 void MyDrawing::scaleUp(GraphicsContext *gc)
 {
+    vc->scaleUp();
     gc->clear();
     paint(gc);
 }
@@ -124,8 +125,8 @@ void MyDrawing::scaleDown(GraphicsContext *gc)
 }
 void MyDrawing::translateUp(GraphicsContext *gc)
 {
-    gc->clear();
     vc->translateUp();
+    gc->clear();
     paint(gc);
 }
 void MyDrawing::translateRight(GraphicsContext *gc)

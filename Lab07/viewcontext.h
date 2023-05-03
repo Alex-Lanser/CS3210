@@ -15,9 +15,17 @@ public:
     void translateRight();
     void translateDown();
     void translateLeft();
+    void scaleUp();
+    void scaleDown();
 
 private:
     Matrix modelToDevice = Matrix(4, 4);
     Matrix deviceToModel = Matrix(4, 4);
+    Matrix originTranslate = Matrix::identity(4);
+    Matrix centerTranslate = Matrix::identity(4);
+    Matrix inverseOriginTranslate = Matrix::identity(4);
+    Matrix inverseCenterTranslate = Matrix::identity(4);
+    void translateOrigin();
+    void translateCenter();
 };
 #endif
