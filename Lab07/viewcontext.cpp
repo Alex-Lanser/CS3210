@@ -116,7 +116,21 @@ void ViewContext::scaleUp()
     modelToDevice = transform * modelToDevice;
     deviceToModel = deviceToModel * inverseTransform;
     translateCenter();
-    cout << transform << endl;
-    cout << inverseTransform << endl;
+    cout << modelToDevice << endl;
+}
+
+void ViewContext::scaleDown()
+{
+    // Translate to the origin
+    translateOrigin();
+    Matrix inverseTransform = Matrix::identity(4);
+    Matrix transform = Matrix::identity(4);
+    inverseTransform[0][0] = 1 / 0.5;
+    inverseTransform[1][1] = 1 / 0.5;
+    transform[0][0] = 0.5;
+    transform[1][1] = 0.5;
+    modelToDevice = transform * modelToDevice;
+    deviceToModel = deviceToModel * inverseTransform;
+    translateCenter();
     cout << modelToDevice << endl;
 }

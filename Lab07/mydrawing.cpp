@@ -120,6 +120,7 @@ void MyDrawing::scaleUp(GraphicsContext *gc)
 }
 void MyDrawing::scaleDown(GraphicsContext *gc)
 {
+    vc->scaleDown();
     gc->clear();
     paint(gc);
 }
