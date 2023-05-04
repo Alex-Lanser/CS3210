@@ -116,7 +116,6 @@ void ViewContext::scaleUp()
     modelToDevice = transform * modelToDevice;
     deviceToModel = deviceToModel * inverseTransform;
     translateCenter();
-    cout << modelToDevice << endl;
 }
 
 void ViewContext::scaleDown()
@@ -132,5 +131,4 @@ void ViewContext::scaleDown()
     modelToDevice = transform * modelToDevice;
     deviceToModel = deviceToModel * inverseTransform;
     translateCenter();
-    cout << modelToDevice << endl;
 }
