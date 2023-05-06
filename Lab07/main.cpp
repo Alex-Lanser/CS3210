@@ -2,6 +2,7 @@
 #include <unistd.h>
 #include <iostream>
 #include "mydrawing.h"
+#include <cstring>
 int main(void)
 {
     GraphicsContext *gc = new X11Context(1910, 1200, GraphicsContext::BLACK);

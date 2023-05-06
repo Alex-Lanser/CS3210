@@ -2,6 +2,11 @@
 #include "gcontext.h"
 #include "viewcontext.h"
 #include "matrix.h"
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <limits>
+#include <cstring>
 using namespace std;
 
 // Constructor
@@ -21,6 +26,7 @@ MyDrawing::MyDrawing(int width, int height)
     cout << "To translate the image, use the arrow keys respectively." << endl;
     cout << "To rotate: Q-Counter Clockwise; E-Clockwise." << endl;
     cout << "To scale: W-Scale up; S-Scale down." << endl;
+    cout << "To insert an image from stl file: Z" << endl;
     numClicks = 0;                  // Track the number of clicks
     mode = 0;                       // Default mode is line
     color = GraphicsContext::GREEN; // Default color is green
@@ -104,11 +110,13 @@ void MyDrawing::undoShape(GraphicsContext *gc)
 }
 void MyDrawing::rotateClockwise(GraphicsContext *gc)
 {
+    vc->rotateClockwise();
     gc->clear();
     paint(gc);
 }
 void MyDrawing::rotateCounterclockwise(GraphicsContext *gc)
 {
+    vc->rotateCounterclockwise();
     gc->clear();
     paint(gc);
 }
@@ -148,8 +156,61 @@ void MyDrawing::translateLeft(GraphicsContext *gc)
     gc->clear();
     paint(gc);
 }
+void MyDrawing::readFromFile(string filename, GraphicsContext *gc)
+{
+    ifstream ifile(filename);
+    // Empty string to store line from stl file
+    string line;
+    // Variables to store x,y,z file data in
+    double x0;
+    double y0;
+    double z0;
+    double x1;
+    double y1;
+    double z1;
+    double x2;
+    double y2;
+    double z2;
+    string type;
+    int count = 0;
+    // Read lines of the stl file until the last one is reached
+    while (!ifile.eof())
+    {
+        // Store next line of file
+        getline(ifile, line);
+        // Create input string stream connected to line string
+        istringstream iss(line);
+        // Extract data from file
+        iss >> type;
+        int vertexR = type.compare("vertex");
+        if (vertexR == 0 && count == 0)
+        {
+            iss >> x0;
+            iss >> y0;
+            iss >> z0;
+            count++;
+        }
+        if (vertexR == 0 && count == 1)
+        {
+            iss >> x1;
+            iss >> y1;
+            iss >> z1;
+            count++;
+        }
+        if (vertexR == 0 && count == 2)
+        {
+            iss >> x2;
+            iss >> y2;
+            iss >> z1;
+            count = 0;
+        }
+        im.addTriangle(x0, y0, x1, y1, x2, y2, color);
+    }
+    im.draw(gc, vc);
+}
 void MyDrawing::keyDown(GraphicsContext *gc, unsigned int keycode)
 {
+    // cout << keycode << endl;
     switch (keycode)
     {
     case 0x31:
@@ -208,6 +269,13 @@ void MyDrawing::keyDown(GraphicsContext *gc, unsigned int keycode)
         break;
     case 0xFF51: // Left arrow translate left
         translateLeft(gc);
+        break;
+    case 0x7A: // Insert stl file, Z key
+        cout << "Enter file name: " << endl;
+        string fileinput;
+        cin >> fileinput;
+        gc->clear();
+        readFromFile(fileinput, gc);
         break;
     }
 }

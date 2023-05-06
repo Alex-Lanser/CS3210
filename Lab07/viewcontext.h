@@ -17,6 +17,8 @@ public:
     void translateLeft();
     void scaleUp();
     void scaleDown();
+    void rotateCounterclockwise();
+    void rotateClockwise();
 
 private:
     Matrix modelToDevice = Matrix(4, 4);

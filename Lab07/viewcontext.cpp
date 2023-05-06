@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cmath>
 #include "viewcontext.h"
 #include "matrix.h"
 using namespace std;
@@ -128,6 +129,42 @@ void ViewContext::scaleDown()
     inverseTransform[1][1] = 1 / 0.5;
     transform[0][0] = 0.5;
     transform[1][1] = 0.5;
+    modelToDevice = transform * modelToDevice;
+    deviceToModel = deviceToModel * inverseTransform;
+    translateCenter();
+}
+
+void ViewContext::rotateClockwise()
+{
+    translateOrigin();
+    Matrix inverseTransform = Matrix::identity(4);
+    Matrix transform = Matrix::identity(4);
+    transform[0][0] = cos(-10 * M_PI / 180);
+    transform[0][1] = sin(-10 * M_PI / 180);
+    transform[1][0] = -sin(-10 * M_PI / 180);
+    transform[1][1] = cos(-10 * M_PI / 180);
+    inverseTransform[0][0] = cos(10 * M_PI / 180);
+    inverseTransform[0][1] = sin(10 * M_PI / 180);
+    inverseTransform[1][0] = -sin(10 * M_PI / 180);
+    inverseTransform[1][1] = cos(10 * M_PI / 180);
+    modelToDevice = transform * modelToDevice;
+    deviceToModel = deviceToModel * inverseTransform;
+    translateCenter();
+}
+
+void ViewContext::rotateCounterclockwise()
+{
+    translateOrigin();
+    Matrix inverseTransform = Matrix::identity(4);
+    Matrix transform = Matrix::identity(4);
+    transform[0][0] = cos(10 * M_PI / 180);
+    transform[0][1] = sin(10 * M_PI / 180);
+    transform[1][0] = -sin(10 * M_PI / 180);
+    transform[1][1] = cos(10 * M_PI / 180);
+    inverseTransform[0][0] = cos(-10 * M_PI / 180);
+    inverseTransform[0][1] = sin(-10 * M_PI / 180);
+    inverseTransform[1][0] = -sin(-10 * M_PI / 180);
+    inverseTransform[1][1] = cos(-10 * M_PI / 180);
     modelToDevice = transform * modelToDevice;
     deviceToModel = deviceToModel * inverseTransform;
     translateCenter();

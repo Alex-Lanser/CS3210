@@ -16,6 +16,7 @@ public:
     virtual void mouseButtonDown(GraphicsContext *gc, unsigned int button, int x, int y);
     virtual void keyDown(GraphicsContext *gc, unsigned int keycode);
     ~MyDrawing();
+    void readFromFile(string filename, GraphicsContext *gc);
 
 private:
     Image im;
