@@ -156,7 +156,7 @@ void MyDrawing::translateLeft(GraphicsContext *gc)
     gc->clear();
     paint(gc);
 }
-void MyDrawing::readFromFile(string filename, GraphicsContext *gc)
+void MyDrawing::readFromFile(string filename)
 {
     ifstream ifile(filename);
     // Empty string to store line from stl file
@@ -206,7 +206,6 @@ void MyDrawing::readFromFile(string filename, GraphicsContext *gc)
         }
         im.addTriangle(x0, y0, x1, y1, x2, y2, color);
     }
-    im.draw(gc, vc);
 }
 void MyDrawing::keyDown(GraphicsContext *gc, unsigned int keycode)
 {
@@ -275,7 +274,8 @@ void MyDrawing::keyDown(GraphicsContext *gc, unsigned int keycode)
         string fileinput;
         cin >> fileinput;
         gc->clear();
-        readFromFile(fileinput, gc);
+        readFromFile(fileinput);
+        paint(gc);
         break;
     }
 }
