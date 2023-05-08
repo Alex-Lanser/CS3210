@@ -274,6 +274,7 @@ void MyDrawing::keyDown(GraphicsContext *gc, unsigned int keycode)
         string fileinput;
         cin >> fileinput;
         gc->clear();
+        im.erase();
         readFromFile(fileinput);
         paint(gc);
         break;
