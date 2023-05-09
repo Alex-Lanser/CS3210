@@ -19,6 +19,7 @@ public:
     void scaleDown();
     void rotateCounterclockwise();
     void rotateClockwise();
+    void undoAll();
 
 private:
     Matrix modelToDevice = Matrix(4, 4);
@@ -29,5 +30,7 @@ private:
     Matrix inverseCenterTranslate = Matrix::identity(4);
     void translateOrigin();
     void translateCenter();
+    int width;
+    int height;
 };
 #endif

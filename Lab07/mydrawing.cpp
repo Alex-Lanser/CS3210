@@ -26,6 +26,7 @@ MyDrawing::MyDrawing(int width, int height)
     cout << "To translate the image, use the arrow keys respectively." << endl;
     cout << "To rotate: Q-Counter Clockwise; E-Clockwise." << endl;
     cout << "To scale: W-Scale up; S-Scale down." << endl;
+    cout << "To return back to normal: Enter Key." << endl;
     cout << "To insert an image from stl file: Z" << endl;
     numClicks = 0;                  // Track the number of clicks
     mode = 0;                       // Default mode is line
@@ -156,6 +157,12 @@ void MyDrawing::translateLeft(GraphicsContext *gc)
     gc->clear();
     paint(gc);
 }
+void MyDrawing::undoAll(GraphicsContext *gc, ViewContext *vc)
+{
+    vc->undoAll();
+    gc->clear();
+    paint(gc);
+}
 void MyDrawing::readFromFile(string filename)
 {
     ifstream ifile(filename);
@@ -190,21 +197,21 @@ void MyDrawing::readFromFile(string filename)
             iss >> z0;
             count++;
         }
-        if (vertexR == 0 && count == 1)
+        else if (vertexR == 0 && count == 1)
         {
             iss >> x1;
             iss >> y1;
             iss >> z1;
             count++;
         }
-        if (vertexR == 0 && count == 2)
+        else if (vertexR == 0 && count == 2)
         {
             iss >> x2;
             iss >> y2;
             iss >> z1;
             count = 0;
+            im.addTriangle(x0, y0, x1, y1, x2, y2, color);
         }
-        im.addTriangle(x0, y0, x1, y1, x2, y2, color);
     }
 }
 void MyDrawing::keyDown(GraphicsContext *gc, unsigned int keycode)
@@ -268,6 +275,9 @@ void MyDrawing::keyDown(GraphicsContext *gc, unsigned int keycode)
         break;
     case 0xFF51: // Left arrow translate left
         translateLeft(gc);
+        break;
+    case 0x75: // Return back to normal, U key
+        undoAll(gc, vc);
         break;
     case 0x7A: // Insert stl file, Z key
         cout << "Enter file name: " << endl;

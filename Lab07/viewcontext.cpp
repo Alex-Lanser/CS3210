@@ -7,6 +7,8 @@ using namespace std;
 // Constructor
 ViewContext::ViewContext(int width, int height)
 {
+    this->width = width;
+    this->height = height;
     modelToDevice[0][0] = 1;
     modelToDevice[0][3] = width / 2;
     modelToDevice[1][1] = -1;
@@ -168,4 +170,29 @@ void ViewContext::rotateCounterclockwise()
     modelToDevice = transform * modelToDevice;
     deviceToModel = deviceToModel * inverseTransform;
     translateCenter();
+}
+
+void ViewContext::undoAll()
+{
+    for (int i = 0; i < 4; i++)
+    {
+        for (int j = 0; j < 4; j++)
+        {
+            modelToDevice[i][j] = 0;
+            deviceToModel[i][j] = 0;
+        }
+    }
+    modelToDevice[0][0] = 1;
+    modelToDevice[0][3] = width / 2;
+    modelToDevice[1][1] = -1;
+    modelToDevice[1][3] = height / 2;
+    modelToDevice[2][2] = 1;
+    modelToDevice[3][3] = 1;
+
+    deviceToModel[0][0] = 1;
+    deviceToModel[0][3] = width / -2;
+    deviceToModel[1][1] = -1;
+    deviceToModel[1][3] = height / 2;
+    deviceToModel[2][2] = 1;
+    deviceToModel[3][3] = 1;
 }

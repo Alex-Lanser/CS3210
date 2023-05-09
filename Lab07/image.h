@@ -25,6 +25,7 @@ public:
 
 private:
     vector<Shape *> shapes;
+    vector<Shape *> originalShapes;
     GraphicsContext *gc;
 };
 
