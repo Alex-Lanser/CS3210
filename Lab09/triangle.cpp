@@ -9,21 +9,21 @@
 using namespace std;
 
 // Triangle constructor
-Triangle::Triangle(double x0, double y0, double x1, double y1, double x2, double y2, unsigned int color)
+Triangle::Triangle(double x0, double y0, double z0, double x1, double y1, double z1, double x2, double y2, double z2, unsigned int color)
 {
     this->coord0[0][0] = x0;
     this->coord0[1][0] = y0;
-    this->coord0[2][0] = 0;
+    this->coord0[2][0] = z0;
     this->coord0[3][0] = 1;
 
     this->coord1[0][0] = x1;
     this->coord1[1][0] = y1;
-    this->coord1[2][0] = 0;
+    this->coord1[2][0] = z1;
     this->coord1[3][0] = 1;
 
     this->coord2[0][0] = x2;
     this->coord2[1][0] = y2;
-    this->coord2[2][0] = 0;
+    this->coord2[2][0] = z2;
     this->coord2[3][0] = 1;
 
     this->color = color;

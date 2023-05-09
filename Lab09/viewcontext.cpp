@@ -114,8 +114,10 @@ void ViewContext::scaleUp()
     Matrix transform = Matrix::identity(4);
     inverseTransform[0][0] = 1 / 2;
     inverseTransform[1][1] = 1 / 2;
+    inverseTransform[2][2] = 1 / 2;
     transform[0][0] = 2;
     transform[1][1] = 2;
+    transform[2][2] = 2;
     modelToDevice = transform * modelToDevice;
     deviceToModel = deviceToModel * inverseTransform;
     translateCenter();
@@ -129,8 +131,10 @@ void ViewContext::scaleDown()
     Matrix transform = Matrix::identity(4);
     inverseTransform[0][0] = 1 / 0.5;
     inverseTransform[1][1] = 1 / 0.5;
+    inverseTransform[2][2] = 1 / 0.5;
     transform[0][0] = 0.5;
     transform[1][1] = 0.5;
+    transform[2][2] = 0.5;
     modelToDevice = transform * modelToDevice;
     deviceToModel = deviceToModel * inverseTransform;
     translateCenter();

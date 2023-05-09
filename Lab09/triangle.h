@@ -10,7 +10,7 @@ using namespace std;
 class Triangle : public Shape
 {
 public:
-    Triangle(double x0, double y0, double x1, double y1, double x2, double y2, unsigned int color);
+    Triangle(double x0, double y0, double z0, double x1, double y1, double z1, double x2, double y2, double z2, unsigned int color);
     Shape *clone();
     void draw(GraphicsContext *gc, ViewContext *vc);
 

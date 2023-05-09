@@ -19,17 +19,12 @@ MyDrawing::MyDrawing(int width, int height)
     cout << "4: Yellow" << endl;
     cout << "5: Blue" << endl;
     cout << "6: Green" << endl;
-    cout << "Press T to draw a triangle." << endl;
-    cout << "Press L to draw a line." << endl;
-    cout << "To undo previous shape, press backspace." << endl;
     cout << endl;
     cout << "To translate the image, use the arrow keys respectively." << endl;
     cout << "To rotate: Q-Counter Clockwise; E-Clockwise." << endl;
     cout << "To scale: W-Scale up; S-Scale down." << endl;
     cout << "To return back to normal: Enter Key." << endl;
     cout << "To insert an image from stl file: Z" << endl;
-    numClicks = 0;                  // Track the number of clicks
-    mode = 0;                       // Default mode is line
     color = GraphicsContext::GREEN; // Default color is green
     vc = new ViewContext(width, height);
 }
@@ -41,73 +36,6 @@ MyDrawing::~MyDrawing()
 void MyDrawing::paint(GraphicsContext *gc)
 {
     im.draw(gc, vc);
-}
-void MyDrawing::mouseButtonDown(GraphicsContext *gc, unsigned int button, int x, int y)
-{
-    if (mode == 0) // Line
-    {
-        if (numClicks == 0) // 1st click
-        {
-            x0 = x;
-            y0 = y;
-            numClicks++;
-        }
-        else // 2nd click. Draw line
-        {
-            gc->drawLine(x0, y0, x, y);
-            coord0[0][0] = x0;
-            coord0[1][0] = y0;
-            coord0[3][0] = 1;
-            coord1[0][0] = x;
-            coord1[1][0] = y;
-            coord1[3][0] = 1;
-            Matrix point0 = vc->DeviceToModel(coord0);
-            Matrix point1 = vc->DeviceToModel(coord1);
-            im.addLine(point0[0][0], point0[1][0], point1[0][0], point1[1][0], color);
-            numClicks = 0;
-        }
-    }
-    else if (mode == 1) // Triangle
-    {
-        if (numClicks == 0) // 1st click
-        {
-            x0 = x;
-            y0 = y;
-            numClicks++;
-        }
-        else if (numClicks == 1) // 2nd click
-        {
-            x1 = x;
-            y1 = y;
-            numClicks++;
-        }
-        else // 3rd click. Draw triangle
-        {
-            gc->drawLine(x0, y0, x1, y1);
-            gc->drawLine(x0, y0, x, y);
-            gc->drawLine(x1, y1, x, y);
-            coord0[0][0] = x0;
-            coord0[1][0] = y0;
-            coord0[3][0] = 1;
-            coord1[0][0] = x1;
-            coord1[1][0] = y1;
-            coord1[3][0] = 1;
-            coord2[0][0] = x;
-            coord2[1][0] = y;
-            coord2[3][0] = 1;
-            Matrix point0 = vc->DeviceToModel(coord0);
-            Matrix point1 = vc->DeviceToModel(coord1);
-            Matrix point2 = vc->DeviceToModel(coord2);
-            im.addTriangle(point0[0][0], point0[1][0], point1[0][0], point1[1][0], point2[0][0], point2[1][0], color);
-            numClicks = 0;
-        }
-    }
-}
-void MyDrawing::undoShape(GraphicsContext *gc)
-{
-    gc->clear();
-    im = im.undoShape(im);
-    paint(gc);
 }
 void MyDrawing::rotateClockwise(GraphicsContext *gc)
 {
@@ -210,7 +138,7 @@ void MyDrawing::readFromFile(string filename)
             iss >> y2;
             iss >> z1;
             count = 0;
-            im.addTriangle(x0, y0, x1, y1, x2, y2, color);
+            im.addTriangle(x0, y0, z0, x1, y1, z1, x2, y2, z2, color);
         }
     }
 }
@@ -242,15 +170,6 @@ void MyDrawing::keyDown(GraphicsContext *gc, unsigned int keycode)
     case 0x36:
         gc->setColor(GraphicsContext::GREEN);
         color = GraphicsContext::GREEN;
-        break;
-    case 0x6C:    // L key
-        mode = 0; // Line mode
-        break;
-    case 0x74:    // T key
-        mode = 1; // Triangle mode
-        break;
-    case 0xFF08: // Backspace key
-        undoShape(gc);
         break;
     case 0x65: // E (Rotate clockwise)
         rotateClockwise(gc);

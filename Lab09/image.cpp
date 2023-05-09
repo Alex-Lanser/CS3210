@@ -47,9 +47,9 @@ void Image::addLine(int x0, int y0, int x1, int y1, unsigned int color)
 }
 
 // Add a triangle to the shapes container
-void Image::addTriangle(double x0, double y0, double x1, double y1, double x2, double y2, unsigned int color)
+void Image::addTriangle(double x0, double y0, double z0, double x1, double y1, double z1, double x2, double y2, double z2, unsigned int color)
 {
-    shapes.push_back(new Triangle(x0, y0, x1, y1, x2, y2, color));
+    shapes.push_back(new Triangle(x0, y0, z0, x1, y1, z1, x2, y2, z2, color));
 }
 
 // Draw all lines/triangles in the shapes container
