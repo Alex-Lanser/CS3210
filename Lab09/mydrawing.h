@@ -22,8 +22,10 @@ private:
     Image copyIm;
     unsigned int color;
     ViewContext *vc;
-    void rotateClockwise(GraphicsContext *gc);
-    void rotateCounterclockwise(GraphicsContext *gc);
+    void rotateXClockwise(GraphicsContext *gc);
+    void rotateXCounterclockwise(GraphicsContext *gc);
+    void rotateYClockwise(GraphicsContext *gc);
+    void rotateYCounterclockwise(GraphicsContext *gc);
     void scaleUp(GraphicsContext *gc);
     void scaleDown(GraphicsContext *gc);
     void translateUp(GraphicsContext *gc);

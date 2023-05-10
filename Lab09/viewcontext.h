@@ -17,8 +17,10 @@ public:
     void translateLeft();
     void scaleUp();
     void scaleDown();
-    void rotateCounterclockwise();
-    void rotateClockwise();
+    void rotateXCounterclockwise();
+    void rotateXClockwise();
+    void rotateYCounterclockwise();
+    void rotateYClockwise();
     void undoAll();
 
 private:

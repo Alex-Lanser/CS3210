@@ -37,15 +37,27 @@ void MyDrawing::paint(GraphicsContext *gc)
 {
     im.draw(gc, vc);
 }
-void MyDrawing::rotateClockwise(GraphicsContext *gc)
+void MyDrawing::rotateXClockwise(GraphicsContext *gc)
 {
-    vc->rotateClockwise();
+    vc->rotateXClockwise();
     gc->clear();
     paint(gc);
 }
-void MyDrawing::rotateCounterclockwise(GraphicsContext *gc)
+void MyDrawing::rotateXCounterclockwise(GraphicsContext *gc)
 {
-    vc->rotateCounterclockwise();
+    vc->rotateXCounterclockwise();
+    gc->clear();
+    paint(gc);
+}
+void MyDrawing::rotateYClockwise(GraphicsContext *gc)
+{
+    vc->rotateYClockwise();
+    gc->clear();
+    paint(gc);
+}   
+void MyDrawing::rotateYCounterclockwise(GraphicsContext *gc)
+{
+    vc->rotateYCounterclockwise();
     gc->clear();
     paint(gc);
 }
@@ -171,11 +183,17 @@ void MyDrawing::keyDown(GraphicsContext *gc, unsigned int keycode)
         gc->setColor(GraphicsContext::GREEN);
         color = GraphicsContext::GREEN;
         break;
-    case 0x65: // E (Rotate clockwise)
-        rotateClockwise(gc);
+    case 0x65: // E (Rotate Y clockwise)
+        rotateYClockwise(gc);
         break;
-    case 0x71: // Q (Rotate counter clockwise)
-        rotateCounterclockwise(gc);
+    case 0x71: // Q (Rotate Y counter clockwise)
+        rotateYCounterclockwise(gc);
+        break;
+    case 0x72: // R (Rotate X clockwise)
+        rotateXClockwise(gc);
+        break;
+    case 0x66: // F (Rotate X counter clockwise)
+        rotateXCounterclockwise(gc);
         break;
     case 0x77: // W Scale up
         scaleUp(gc);

@@ -140,42 +140,75 @@ void ViewContext::scaleDown()
     translateCenter();
 }
 
-void ViewContext::rotateClockwise()
+void ViewContext::rotateXClockwise()
+{
+    translateOrigin();
+    Matrix inverseTransform = Matrix::identity(4);
+    Matrix transform = Matrix::identity(4);
+    transform[1][1] = cos(-10 * M_PI / 180);
+    transform[1][2] = -sin(-10 * M_PI / 180);
+    transform[2][1] = sin(-10 * M_PI / 180);
+    transform[2][2] = cos(-10 * M_PI / 180);
+    inverseTransform[1][1] = cos(10 * M_PI / 180);
+    inverseTransform[1][2] = -sin(10 * M_PI / 180);
+    inverseTransform[2][1] = sin(10 * M_PI / 180);
+    inverseTransform[2][2] = cos(10 * M_PI / 180);
+    modelToDevice = transform * modelToDevice;
+    deviceToModel = deviceToModel * inverseTransform;
+    translateCenter();
+}
+
+void ViewContext::rotateXCounterclockwise()
+{
+    translateOrigin();
+    Matrix inverseTransform = Matrix::identity(4);
+    Matrix transform = Matrix::identity(4);
+    transform[1][1] = cos(10 * M_PI / 180);
+    transform[1][2] = -sin(10 * M_PI / 180);
+    transform[2][1] = sin(10 * M_PI / 180);
+    transform[2][2] = cos(10 * M_PI / 180);
+    inverseTransform[1][1] = cos(-10 * M_PI / 180);
+    inverseTransform[1][2] = -sin(-10 * M_PI / 180);
+    inverseTransform[2][1] = sin(-10 * M_PI / 180);
+    inverseTransform[2][2] = cos(-10 * M_PI / 180);
+    modelToDevice = transform * modelToDevice;
+    deviceToModel = deviceToModel * inverseTransform;
+    translateCenter();
+}
+void ViewContext::rotateYClockwise()
 {
     translateOrigin();
     Matrix inverseTransform = Matrix::identity(4);
     Matrix transform = Matrix::identity(4);
     transform[0][0] = cos(-10 * M_PI / 180);
-    transform[0][1] = sin(-10 * M_PI / 180);
-    transform[1][0] = -sin(-10 * M_PI / 180);
-    transform[1][1] = cos(-10 * M_PI / 180);
+    transform[0][2] = sin(-10 * M_PI / 180);
+    transform[2][0] = -sin(-10 * M_PI / 180);
+    transform[2][2] = cos(-10 * M_PI / 180);
     inverseTransform[0][0] = cos(10 * M_PI / 180);
-    inverseTransform[0][1] = sin(10 * M_PI / 180);
-    inverseTransform[1][0] = -sin(10 * M_PI / 180);
-    inverseTransform[1][1] = cos(10 * M_PI / 180);
+    inverseTransform[0][2] = sin(10 * M_PI / 180);
+    inverseTransform[2][0] = -sin(10 * M_PI / 180);
+    inverseTransform[2][2] = cos(10 * M_PI / 180);
     modelToDevice = transform * modelToDevice;
     deviceToModel = deviceToModel * inverseTransform;
     translateCenter();
 }
-
-void ViewContext::rotateCounterclockwise()
+void ViewContext::rotateYCounterclockwise()
 {
     translateOrigin();
     Matrix inverseTransform = Matrix::identity(4);
     Matrix transform = Matrix::identity(4);
     transform[0][0] = cos(10 * M_PI / 180);
-    transform[0][1] = sin(10 * M_PI / 180);
-    transform[1][0] = -sin(10 * M_PI / 180);
-    transform[1][1] = cos(10 * M_PI / 180);
+    transform[0][2] = sin(10 * M_PI / 180);
+    transform[2][0] = -sin(10 * M_PI / 180);
+    transform[2][2] = cos(10 * M_PI / 180);
     inverseTransform[0][0] = cos(-10 * M_PI / 180);
-    inverseTransform[0][1] = sin(-10 * M_PI / 180);
-    inverseTransform[1][0] = -sin(-10 * M_PI / 180);
-    inverseTransform[1][1] = cos(-10 * M_PI / 180);
+    inverseTransform[0][2] = sin(-10 * M_PI / 180);
+    inverseTransform[2][0] = -sin(-10 * M_PI / 180);
+    inverseTransform[2][2] = cos(-10 * M_PI / 180);
     modelToDevice = transform * modelToDevice;
     deviceToModel = deviceToModel * inverseTransform;
     translateCenter();
 }
-
 void ViewContext::undoAll()
 {
     for (int i = 0; i < 4; i++)
