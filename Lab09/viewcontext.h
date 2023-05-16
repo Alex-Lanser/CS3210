@@ -15,6 +15,8 @@ public:
     void translateRight();
     void translateDown();
     void translateLeft();
+    void translateOut();
+    void translateIn();
     void scaleUp();
     void scaleDown();
     void rotateXCounterclockwise();

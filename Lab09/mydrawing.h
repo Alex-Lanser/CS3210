@@ -32,6 +32,8 @@ private:
     void translateRight(GraphicsContext *gc);
     void translateDown(GraphicsContext *gc);
     void translateLeft(GraphicsContext *gc);
+    void translateOut(GraphicsContext *gc);
+    void translateIn(GraphicsContext *gc);
     void undoAll(GraphicsContext *gc, ViewContext *vc);
 
     Matrix coord0 = Matrix(4, 1);

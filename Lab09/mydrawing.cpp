@@ -21,7 +21,9 @@ MyDrawing::MyDrawing(int width, int height)
     cout << "6: Green" << endl;
     cout << endl;
     cout << "To translate the image, use the arrow keys respectively." << endl;
-    cout << "To rotate: Q-Counter Clockwise; E-Clockwise." << endl;
+    cout << "To traslate with the Z-axis, use T and G." << endl;
+    cout << "To rotate Y-axis: Q-Counter Clockwise; E-Clockwise." << endl;
+    cout << "To rotate X-axis: F-Counter Clockwise; R-Clockwise." << endl;
     cout << "To scale: W-Scale up; S-Scale down." << endl;
     cout << "To return back to normal: Enter Key." << endl;
     cout << "To insert an image from stl file: Z" << endl;
@@ -97,6 +99,19 @@ void MyDrawing::translateLeft(GraphicsContext *gc)
     gc->clear();
     paint(gc);
 }
+
+void MyDrawing::translateOut(GraphicsContext *gc)
+{
+    vc->translateOut();
+    gc->clear();
+    paint(gc);
+}
+void MyDrawing::translateIn(GraphicsContext *gc)
+{
+    vc->translateIn();
+    gc->clear();
+    paint(gc);
+}
 void MyDrawing::undoAll(GraphicsContext *gc, ViewContext *vc)
 {
     vc->undoAll();
@@ -148,7 +163,7 @@ void MyDrawing::readFromFile(string filename)
         {
             iss >> x2;
             iss >> y2;
-            iss >> z1;
+            iss >> z2;
             count = 0;
             im.addTriangle(x0, y0, z0, x1, y1, z1, x2, y2, z2, color);
         }
@@ -184,10 +199,10 @@ void MyDrawing::keyDown(GraphicsContext *gc, unsigned int keycode)
         color = GraphicsContext::GREEN;
         break;
     case 0x65: // E (Rotate Y clockwise)
-        rotateYClockwise(gc);
+        rotateYCounterclockwise(gc);
         break;
     case 0x71: // Q (Rotate Y counter clockwise)
-        rotateYCounterclockwise(gc);
+        rotateYClockwise(gc);
         break;
     case 0x72: // R (Rotate X clockwise)
         rotateXClockwise(gc);
@@ -212,6 +227,12 @@ void MyDrawing::keyDown(GraphicsContext *gc, unsigned int keycode)
         break;
     case 0xFF51: // Left arrow translate left
         translateLeft(gc);
+        break;
+    case 0x74: // T translate out
+        translateOut(gc);
+        break;
+    case 0x67: // G translate in
+        translateIn(gc);
         break;
     case 0x75: // Return back to normal, U key
         undoAll(gc, vc);
